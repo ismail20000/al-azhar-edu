@@ -75,6 +75,35 @@
     }
   </style>
 </head>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const images = document.querySelectorAll("img");
+  let errorCount = 0;
+
+  images.forEach(img => {
+    img.addEventListener("error", () => {
+      errorCount++;
+      console.error(`❌ الصورة فشلت في التحميل: ${img.src}`);
+      let errMsg = document.createElement("p");
+      errMsg.style.color = "red";
+      errMsg.textContent = `❌ لم يتم تحميل الصورة: ${img.src}`;
+      document.body.appendChild(errMsg);
+    });
+
+    img.addEventListener("load", () => {
+      console.log(`✅ الصورة تم تحميلها: ${img.src}`);
+    });
+  });
+
+  window.addEventListener("load", () => {
+    if (errorCount === 0) {
+      console.log("🎉 كل الصور تم تحميلها بنجاح");
+    }
+  });
+});
+</script>
+
 <body>
 
   <header>
